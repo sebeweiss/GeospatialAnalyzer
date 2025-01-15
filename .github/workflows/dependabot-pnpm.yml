@@ -1,0 +1,36 @@
+name: Dependabot PNPM Updates
+
+on:
+  pull_request:
+    branches:
+      - dependabot/**
+
+jobs:
+  update-pnpm:
+    runs-on: debian-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install PNPM
+        run: npm install -g pnpm
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Run Updates
+        run: pnpm update
+
+      - name: Commit Changes
+        run: |
+          git config --global user.name "Dependabot"
+          git config --global user.email "dependabot@github.com"
+          git add .
+          git commit -m "chore(deps): bump dependencies"
+          git push
