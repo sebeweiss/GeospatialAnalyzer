@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "matchDepTypes": ["dependencies"],
+      "groupName": "Production dependencies"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "groupName": "Development dependencies"
+    }
+  ]
+}
