@@ -1,14 +1,46 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
+  "semanticCommits": "enabled",
   "packageRules": [
     {
+      "matchUpdateTypes": ["major"],
+      "excludePackagePatterns": ["^@nestjs/", "^@types/"],
+      "groupName": "Major Upgrades",
+      "labels": ["major", "dependencies"],
+      "prCreation": "not-pending",
+      "prPriority": -1
+    },
+    {
+      "matchPackagePatterns": ["^@nestjs/"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "NestJS Major Updates",
+      "labels": ["nestjs", "major", "framework"],
+      "prCreation": "not-pending",
+      "prPriority": -1
+    },
+    {
+      "matchPackagePatterns": ["^@nestjs/"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "NestJS Minor Updates",
+      "labels": ["nestjs", "minor-patch", "framework"]
+    },
+    {
+      "matchPackagePatterns": ["^@types/"],
+      "groupName": "TypeScript type definitions",
+      "labels": ["types", "typescript"]
+    },
+    {
       "matchDepTypes": ["dependencies"],
-      "groupName": "Production dependencies"
+      "excludePackagePatterns": ["^@nestjs/", "^@types/"],
+      "groupName": "Production dependencies",
+      "labels": ["dependencies"]
     },
     {
       "matchDepTypes": ["devDependencies"],
-      "groupName": "Development dependencies"
+      "excludePackagePatterns": ["^@nestjs/", "^@types/"],
+      "groupName": "Development dependencies",
+      "labels": ["devDependencies"]
     }
   ]
 }
